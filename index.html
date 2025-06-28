@@ -6,19 +6,20 @@
   <title>Happy Birthday 💜</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to bottom right, #d8b4f8, #f3d1f4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
-      overflow: hidden;
-      color: #4c2474;
-    }
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(to bottom right, #d8b4f8, #f3d1f4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 200vh; /* agar bisa discroll */
+  padding-top: 50px;
+  color: #4c2474;
+  overflow-x: hidden;
+}
+
 
     h1 {
       font-size: 3em;
@@ -114,6 +115,34 @@
       if (music.paused) music.play();
       if (video.paused) video.play();
     });
+
+  // Scroll ke tengah atas saat load
+  window.addEventListener("load", function () {
+    window.scrollTo({
+      top: 100, // ubah sesuai kebutuhan
+      behavior: "smooth"
+    });
+  });
+
+  document.getElementById("playButton").addEventListener("click", function () {
+    const music = document.getElementById("backgroundMusic");
+    const video = document.getElementById("videoPlayer");
+
+    video.muted = false;
+    video.play().catch(err => console.log("Video gagal autoplay:", err));
+    music.play().catch(err => console.log("Audio gagal autoplay:", err));
+
+    this.style.display = "none";
+  });
+
+  document.addEventListener("click", function () {
+    const music = document.getElementById("backgroundMusic");
+    const video = document.getElementById("videoPlayer");
+
+    if (music.paused) music.play();
+    if (video.paused) video.play();
+  });
+
   </script>
 </body>
 </html>
